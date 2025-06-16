@@ -1,6 +1,6 @@
 # Screen Information
 experiment:
-  id: ""  # Experiment identifier
+  id: "olives"  # Experiment identifier
   notebook_entries: ""  # Links or references to lab notebook entries
   dates: 
     start: ""
@@ -8,53 +8,74 @@ experiment:
 
 # Cellular Conditions
 cellular:
-  cell_line: ""  # e.g., HeLa, HEK293, etc.
-  imaging_timepoint: ""  # When imaging occurred after treatment
+  cell_line: "HeLa"  # e.g., HeLa, HEK293, etc.
+  imaging_timepoint: "26 hours"  # When imaging occurred after treatment
   treatment:
-    summary: ""  # Brief description of treatment
-    details: ""  # Detailed protocol or conditions
-  plates: ""  # Number of plates
-  wells_per_plate: ""  # Number of wells per plate
+    summary: "Toxoplasma infection"  # Brief description of treatment
+    details: "HeLa cells were infected with a library of mutant Toxoplasma (knock outs). 26 hours after infection, the cells were stained and fixed with 4% FA and 0.02% GA."  # Detailed protocol or conditions
+  plates: "1"  # Number of plates
+  wells_per_plate: "2"  # Number of wells per plate
 
 # Sequencing by Synthesis (SBS)
 sbs:
-  cycles: ""  # Number of cycles
-  cycle_order: ""  # Order of cycles
-  background_channel: ""  # Suggested background channel
+  cycles: "6"  # Number of cycles
+  cycle_order: "CATG"  # Order of cycles
+  background_channel: "DAPI"  # Suggested background channel
   library_details:
-    number_of_genes: ""
-    guides_per_gene: ""
+    number_of_genes: "12"
+    guides_per_gene: "5"
     other_information: ""
 
 # Phenotype (PH) Steps
 phenotype:
-  background_channel_cell: ""  # For cell segmentation
-  background_channel_body: ""  # For body (e.g. parasite) segmentation
+  background_channel_cell: "MitoTracker"  # For cell segmentation
+  background_channel_body: "GRA7"  # For body (e.g. parasite) segmentation
   
-  # Rounds of staining/imaging (in order they were stained for each round)
+  # Rounds of staining/imaging (in order they were stained)
   # Add more rounds as needed
   rounds:
     - round_number: 1
       stains:
+        - name: "ConA"
+          marker_of: "Cell membrane"
+          channel: "AF750"
+        - name: "MitoTracker"
+          marker_of: "Mitochondria Matrix"
+          channel: "Cy5"
+        - name: "GFP-OMP25"
+          marker_of: "Mtochondria Outer membrane"
+          channel: "GFP"
         - name: "DAPI"  # Name of stain/antibody
           marker_of: "Nuclei"  # What it marks
           channel: "DAPI"  # Channel used (e.g., DAPI, CY3)
-        - name: "ConA"
-          marker_of: "Cytoplasm"
-          channel: "AF750"
     
     - round_number: 2
       stains:
-        - name: ""  # Name of stain/antibody
-          marker_of: ""  # What it marks
-          channel: ""  # Channel used (e.g., DAPI, CY3)
-        - name: ""
-          marker_of: ""
-          channel: ""
+        - name: "AcTubulin"  # Name of stain/antibody
+          marker_of: "Acetylated Tubulin"  # What it marks
+          channel: "AF750"  # Channel used (e.g., DAPI, CY3)
+        - name: "GRA7"
+          marker_of: "Parasitophorous Vacuole membrane"
+          channel: "Cy3"
+        - name: "DAPI"
+          marker_of: "Nuclei"
+          channel: "DAPI"
+  
+    - round_number: 3
+      stains:
+        - name: "GM130"  # Name of stain/antibody
+          marker_of: "Golgi membrane"  # What it marks
+          channel: "Cy5"  # Channel used (e.g., DAPI, CY3)
+        - name: "WGA"
+          marker_of: "Endo-Lysosome lumen"
+          channel: "Cy3"
+        - name: "DAPI"
+          marker_of: "Nuclei"
+          channel: "DAPI"
 
 # Data Generated
 data:
-  storage_format: ""  # e.g., .nd2, .tiff
-  location: "/lab/.."  # Base path for data storage
+  storage_format: ".nd2"  # e.g., .nd2, .tiff
+  location: "/lab/ops_data/olives"  # Base path for data storage in cheesegrater_ops
   
   notes: ""  # Any additional notes about the data or file naming conventions
