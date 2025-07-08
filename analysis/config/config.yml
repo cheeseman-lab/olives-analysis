@@ -20,3 +20,182 @@ preprocess:
   sbs_channel_order_flip: true
   phenotype_channel_order_flip: true
   sample_fraction: 0.1
+sbs:
+  alignment_method: DAPI
+  channel_names:
+  - DAPI
+  - Mitochondria
+  - Cytoplasm
+  - G
+  - T
+  - A
+  - C
+  upsample_factor: 2
+  skip_cycles_indices: null
+  manual_background_cycle_index: 5
+  manual_channel_mapping:
+  - - DAPI
+    - G
+    - T
+    - A
+    - C
+  - - DAPI
+    - G
+    - T
+    - A
+    - C
+  - - DAPI
+    - G
+    - T
+    - A
+    - C
+  - - DAPI
+    - G
+    - T
+    - A
+    - C
+  - - DAPI
+    - G
+    - T
+    - A
+    - C
+  - - DAPI
+    - Mitochondria
+    - G
+    - T
+    - A
+    - C
+    - Cytoplasm
+  extra_channel_indices:
+  - 0
+  - 1
+  - 2
+  max_filter_width: 3
+  spot_detection_method: standard
+  dapi_cycle: 1
+  cyto_cycle: 6
+  cyto_cycle_index: 5
+  dapi_index: 0
+  cyto_index: 1
+  segmentation_method: cellpose
+  gpu: false
+  reconcile: contained_in_cells
+  segment_cells: true
+  df_barcode_library_fp: config/barcode_library.tsv
+  threshold_peaks: 120
+  call_reads_method: percentile
+  bases:
+  - G
+  - T
+  - A
+  - C
+  q_min: 0
+  barcode_col: sgRNA
+  prefix_col: prefix
+  error_correct: false
+  sort_calls: peak
+  mode: null
+  peak_width: 5
+  nuclei_diameter: 8.884866446580956
+  cell_diameter: 24.514670406003766
+  nuclei_flow_threshold: 0.4
+  nuclei_cellprob_threshold: 0.0
+  cell_flow_threshold: 1
+  cell_cellprob_threshold: 0
+  cyto_model: cyto3
+phenotype:
+  foci_channel: null
+  channel_names:
+  - DAPI
+  - OMP25
+  - MITOTRACKER
+  - CONA
+  - GRA7
+  - ACTUBULIN
+  - WGA
+  - GM130
+  align: true
+  dapi_index: 0
+  cyto_index: 2
+  segmentation_method: cellpose
+  reconcile: contained_in_cells
+  gpu: false
+  cp_method: cp_multichannel
+  mode: null
+  nuclei_diameter: 115.27422175478686
+  cell_diameter: 173.3153642207621
+  nuclei_flow_threshold: 0.4
+  nuclei_cellprob_threshold: 0.0
+  cell_flow_threshold: 1
+  cell_cellprob_threshold: 0
+  cyto_model: cyto3
+  alignments:
+    1:
+      steps:
+      - target: 4
+        source: 7
+        riders:
+        - 8
+        - 9
+        remove_channel: source
+      - target: 0
+        source: 4
+        riders:
+        - 5
+        - 6
+        - 7
+        - 8
+        remove_channel: source
+  vacuole_detection: true
+  vacuole_channel_index: 4
+  vacuole_min_size: 10
+  vacuole_max_size: 200
+  nuclei_detection: false
+  min_distance_between_maxima: 5
+merge:
+  merge_combo_fp: config/merge_combo.tsv
+  sbs_metadata_cycle: 1
+  sbs_metadata_channel: null
+  ph_metadata_channel: null
+  initial_sites:
+  - - 84
+    - 5
+  - - 1067
+    - 62
+  - - 2714
+    - 170
+  - - 4613
+    - 291
+  - - 6203
+    - 404
+  - - 6589
+    - 437
+  det_range:
+  - 0.015
+  - 0.017
+  score: 0.1
+  threshold: 10
+aggregate:
+  metadata_cols_fp: config/cell_data_metadata_cols.tsv
+  collapse_cols:
+  - gene_symbol_0
+  - sgRNA_0
+  - gene_symbol_1
+  - sgRNA_1
+  classifier_path: config/vacuole_classifier.dill
+  aggregate_combo_fp: config/aggregate_combo.tsv
+  filter_queries:
+  - mapped_single_gene == True
+  perturbation_name_col: gene_symbol_0
+  drop_cols_threshold: 0.1
+  drop_rows_threshold: 0.01
+  impute: true
+  contamination: 0.01
+  batch_cols:
+  - plate
+  - well
+  control_key: nontargeting
+  perturbation_id_col: sgRNA_0
+  variance_or_ncomp: 0.99
+  num_align_batches: 1
+  agg_method: median

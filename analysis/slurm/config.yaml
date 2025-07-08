@@ -10,7 +10,7 @@ default-resources:
     cpus_per_task: 1
     runtime: 400
     slurm_extra: "'--output=slurm/slurm_output/rule/%j.out'"
-jobs: 150
+jobs: 300
 
 set-resources:
    # preprocessing
@@ -85,8 +85,16 @@ set-resources:
         mem_mb: 1000
     combine_phenotype_info:
         mem_mb: 20000
+    identify_vacuoles:
+        mem_mb: 2000
     extract_phenotype_cp:
         mem_mb: 3000
+    extract_phenotype_vacuoles:
+        mem_mb: 2000
+    merge_phenotype_vacuoles:
+        mem_mb: 300000
+    merge_vacuoles_phenotype_cp:
+        mem_mb: 2000
     merge_phenotype_cp:
         mem_mb: 300000
     eval_segmentation_phenotype:
