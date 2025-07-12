@@ -1,0 +1,72 @@
+
+# ~BrieFlow analysis configuration file~
+
+# All paths are resolved relative to the directory the workflow is run from.
+
+# Parameters:
+all:
+  root_fp: brieflow_output/
+preprocess:
+  sbs_samples_fp: config/sbs_samples.tsv
+  sbs_combo_fp: config/sbs_combo.tsv
+  phenotype_samples_fp: config/phenotype_samples.tsv
+  phenotype_combo_fp: config/phenotype_combo.tsv
+  sbs_channel_order: null
+  phenotype_channel_order: null
+  phenotype_round_order:
+  - 1
+  - 2
+  - 3
+  sbs_channel_order_flip: true
+  phenotype_channel_order_flip: true
+  sample_fraction: 0.1
+sbs:
+  alignment_method: DAPI
+  channel_names:
+  - DAPI
+  - Mitochondria
+  - Cytoplasm
+  - G
+  - T
+  - A
+  - C
+  upsample_factor: 2
+  skip_cycles_indices: null
+  manual_background_cycle_index: 5
+  extra_channel_indices:
+  - 0
+  - 1
+  - 2
+  max_filter_width: 3
+  spot_detection_method: standard
+  dapi_cycle: 1
+  cyto_cycle: 6
+  cyto_cycle_index: 5
+  dapi_index: 0
+  cyto_index: 1
+  segmentation_method: cellpose
+  gpu: false
+  reconcile: contained_in_cells
+  segment_cells: true
+  df_barcode_library_fp: config/barcode_library.tsv
+  threshold_peaks: 100
+  call_reads_method: percentile
+  bases:
+  - G
+  - T
+  - A
+  - C
+  q_min: 0
+  barcode_col: sgRNA
+  prefix_col: prefix
+  error_correct: false
+  sort_calls: peak
+  mode: null
+  peak_width: 5
+  nuclei_diameter: 8.884866446580956
+  cell_diameter: 24.514670406003766
+  nuclei_flow_threshold: 0.4
+  nuclei_cellprob_threshold: 0.0
+  cell_flow_threshold: 1
+  cell_cellprob_threshold: 0
+  cyto_model: cyto3
